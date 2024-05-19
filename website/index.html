@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Produit</title>
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General styles */
+        body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #ff4081;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 0;
+    background-color: #ff4080;
+    color: white;
+    height: 100vh;
+    margin-top: 60px;
+}
+
+.hero .text {
+    flex: 1;
+    padding: 20px;
+}
+
+.hero .text h1 {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.hero .text p {
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+.hero .text .cta {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: white;
+    color: #ff4081;
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero .text .cta:hover {
+    background-color: #ff1c6b;
+    color: white;
+}
+
+.hero .image {
+    flex: 1;
+    padding: 20px;
+}
+
+.hero .image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer .contact-info, footer .social-media {
+    flex: 1;
+    padding: 20px;
+}
+
+footer .social-media a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+footer .social-media a:hover {
+    color: #ff4081;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+#cart-items li {
+    margin: 10px 0;
+}
+
+#contact {
+    background-color: #f9f9f9;
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-form-wrapper form {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-wrapper .contact-info {
+    flex: 1;
+    max-width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-wrapper .contact-info h3 {
+    margin-top: 0;
+    font-weight: 500;
+}
+
+.contact-form-wrapper .contact-info p {
+    margin: 10px 0;
+}
+
+.contact-form-wrapper .social-media a {
+    display: inline-block;
+    margin: 10px 5px;
+    text-decoration: none;
+    color: #ff4081;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.contact-form-wrapper .social-media a:hover {
+    color    : #ff1c6b;
+}
+
+
+/* Input fields */
+.contact-form-wrapper form input[type="text"],
+.contact-form-wrapper form input[type="email"],
+.contact-form-wrapper form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form-wrapper form input[type="text"]:focus,
+.contact-form-wrapper form input[type="email"]:focus,
+.contact-form-wrapper form textarea:focus {
+    border-color: #ff4081;
+}
+
+/* Submit button */
+.contact-form-wrapper form button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form-wrapper form button:hover {
+    background-color: #ff1c6b;
+}
+
+/* Fonts */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+header {
+    background: linear-gradient(90deg, #ff4081, #ff79a6);
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+    background-color: white;
+}
+
+nav ul li a:hover {
+    color: #ffebee;
+    transform: scale(1.1);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+#product-description {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.product-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.product-details {
+    flex: 2;
+    padding: 40px;
+}
+
+.product-details h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.product-details p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-details strong {
+    font-weight: 700;
+}
+
+.product-details .buy-now {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff4081;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product-details .buy-now:hover {
+    background-color: #ff1c6b;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .product-wrapper {
+        flex-direction: column;
+    }
+
+    .product-image, .product-details {
+        flex: none;
+        width: 100%;
+    }
+
+    .product-image img {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .product-details {
+        padding: 20px;
+    }
+}
+        body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Navbar styles */
+header {
+    background: linear-gradient(90deg, #ff4081, #ff79a6);
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+    background-color: white;
+}
+
+nav ul li a:hover {
+    color: #ffebee;
+    transform: scale(1.1);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* Product description section */
+#product-description {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.product-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.product-details {
+    flex: 2;
+    padding: 40px;
+}
+
+.product-details h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.product-details p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-details strong {
+    font-weight: 700;
+}
+
+.product-details .buy-now {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff4081;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product-details .buy-now:hover {
+    background-color: #ff1c6b;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .product-wrapper {
+        flex-direction: column;
+    }
+
+    .product-image, .product-details {
+        flex: none;
+        width: 100%;
+    }
+
+    .product-image img {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .product-details {
+        padding: 20px;
+    }
+}
+/* General styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Navbar styles */
+header {
+    background: linear-gradient(90deg, #ff4081, #ff79a6);
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    height: 120px; /* Adjust this value to make the logo bigger or smaller */
+    object-fit: contain;
+    margin-top: -35px;
+    margin-bottom: -35px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+    background-color: white;
+}
+
+nav ul li a:hover {
+    color: #ffebee;
+    transform: scale(1.1);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* Product description section */
+#product-description {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+    margin-top: 100px; /* Adjusted to account for the fixed header */
+}
+
+.product-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.product-details {
+    flex: 2;
+    padding: 40px;
+}
+
+.product-details h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.product-details p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-details strong {
+    font-weight: 700;
+}
+
+.product-details .buy-now {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff4081;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product-details .buy-now:hover {
+    background-color: #ff1c6b;
+    transform: scale(1.05);
+}
+
+
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="logo"><img src="logo-removebg-preview.png" alt=""></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Acceuil</a></li>
+                    <li><a href="#product-description">Produit</a></li>
+                    
+                    <li><a href="#contact">Nous Contacter</a></li>
+                    
+                    <li><a href="#cart">Cart (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+    <section id="home">
+        <div class="hero">
+            <div class="text">
+                <h1>Bienvenue chez SIEMPRE BELLISSIMO</h1>
+                <p>Un maquillage personnalisé, en toute simplicité</p>
+                
+            </div>
+            <div class="image">
+                <img src="images/1715795373967-removebg-preview.png" alt="Makeup Image">
+            </div>
+        </div>
+    </section>
+
+    <section id="product-description">
+        <div class="container">
+            <div class="product-wrapper">
+                <div class="product-image">
+                    <img src="images/1715795373910.jpg" alt="Machine à maquillage ">
+                </div>
+                <div class="product-details">
+                    <h2>Machine à maquillage</h2>
+                    <p>Révolutionnez votre routine beauté avec notre machine à maquillage Voici, le premier système automatisé qui adapte le maquillage à votre teint et à vos préférences. Grâce à une technologie de scan avancée, Voici analyse votre visage et applique un maquillage personnalisé pour chaque occasion. Que vous prépariez pour une journée au bureau ou une soirée glamour, Voici vous offre un look impeccable en quelques minutes seulement. Durable, facile à utiliser et conçu avec élégance, Voici est l’allié beauté indispensable pour celles et ceux qui cherchent à optimiser leur temps tout en soignant leur apparence.</p>
+                    
+                    <button class="buy-now">Achetez Maintenant</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2>Nous Contacter</h2>
+            <div class="contact-form-wrapper">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer</button>
+                </form>
+              
+            </div>
+        </div>
+    </section>
+ 
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 siemprebellissimo</p>
+            <div class="contact-info">
+                <p>Email: siemprebellissimo@gmail.com</p>
+                <p>Phone: +212 721-383960</p>
+                
+            </div>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="https://www.instagram.com/siemprebellisimo?igsh=MWEwMXVtaHZndjlzaw==">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cart" class="cart-overlay">
+        <div class="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </ul>
+            <button id="checkout">Checkout</button>
+            <button id="close-cart">Close</button>
+        </div>
+    </div>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav ul');
+
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
